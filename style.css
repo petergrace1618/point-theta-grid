@@ -28,7 +28,8 @@ canvas {
 }
 
 #coords {
-    color: rgb(200 50 100);
+    display: inline;
+    color: hsl(16, 60%, 50%);
 }
 #theta {
     color: rgb(0 200 255 / 30%);
