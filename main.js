@@ -14,15 +14,13 @@ ctx.scale(3, -3);
 function Point(x, y) {
   this.x = x;
   this.y = y;
+  
+  const theta = Math.atan(this.y / this.x) + quadrantAddend(this);
+  const thetaDeg = theta * 360 / (2 * Math.PI);
 
-  this.theta = () => {
-    return Math.atan(p.y / p.x) + quadrantAddend(p);
-    // const r = Math.hypot(p.x, p.y);
-    // return Math.acos(p.x / r) + quadrantAddend(p);
-    // return Math.asin(p.y / r);
-  }
+  this.theta = () => theta;
 
-  this.thetaDeg = () => this.theta() * 360 / (2 * Math.PI);
+  this.thetaDeg = () => thetaDeg; //theta * 360 / (2 * Math.PI);
 
   // Adds a multiple of PI based on the quadrant of the point
   // to give an angle in the range [0, 2 * PI)
@@ -32,20 +30,12 @@ function Point(x, y) {
     const x = Math.sign(p.x) + 1;
     const y = Math.sign(p.y) + 1;
     
-    const multiplier = {
-      "atan": [
-        [1, 2, 2],
-        [1, 0, 0],
-        [1, 0, 0]
-      ],
-      "acos": [
-        [0.5, 1, 1.5],
-        [0,   0,   0],
-        [0 ,  0,   0],
-      ]
-    };
-
-    return multiplier['atan'][y][x] * Math.PI;
+    const multiplier = [
+      [1, 2, 2],
+      [1, 0, 0],
+      [1, 0, 0]
+    ];
+    return multiplier[y][x] * Math.PI;
   }  
 }
 
