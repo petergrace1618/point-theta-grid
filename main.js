@@ -15,29 +15,12 @@ function Point(x, y) {
   this.x = x;
   this.y = y;
 
-  const theta = calculateTheta(this);
+  let theta = Math.atan2(this.y, this.x);
+  theta = theta < 0 ? TWO_PI + theta : theta;
   const thetaDeg = theta * 360 / (2 * Math.PI);
 
   this.theta = () => theta;
   this.thetaDeg = () => thetaDeg;
-
-  function calculateTheta(p) {
-    let theta = Math.atan(p.y / p.x);
-
-    // Converts the result of sign (-1, 0, 1) to 
-    // (0, 1, 2) for use as index into multiplier array
-    const x = Math.sign(p.x) + 1;
-    const y = Math.sign(p.y) + 1;
-    
-    // Adds a multiple of PI based on the quadrant of the point
-    // to give an angle in the range [0, 2 * PI)
-    const multiplier = [
-      [1, 2, 2],
-      [1, 0, 0],
-      [1, 0, 0]
-    ];
-    return theta + multiplier[y][x] * Math.PI;
-  }  
 }
 
 
