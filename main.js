@@ -91,8 +91,8 @@ let canvasX = 0, canvasY = 0;
 const scaleFactor = 3
 
 cvs.addEventListener('mousemove', e => {
-  canvasX = Math.floor(((e.x - cvs.offsetLeft) - width / 2) / scaleFactor);
-  canvasY = Math.floor(((e.y - cvs.offsetTop) - height / 2) / -scaleFactor);
+  canvasX = Math.floor((e.offsetX - width / 2) / scaleFactor);
+  canvasY = Math.floor((e.offsetY - height / 2) / -scaleFactor);
   
   if (e.buttons == 1) {
     draw();
