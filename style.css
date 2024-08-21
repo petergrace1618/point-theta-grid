@@ -1,34 +1,40 @@
 body {
   background-color: black;  
   color: grey;
+  font-size: 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+    width: 600px;
+    margin: 0 auto;
 }
 
 h1 {
   text-align: center;
 }
 
-#controls {
-  width: 600px;
-  height: 2em;
-  margin: 1em auto;
+p {
+    text-indent: 1em;
 }
 
 canvas {
   background-color: #111;
   display: block;
-  margin: 2em auto 1em auto;
+  margin: 1em auto 1em auto;
   border: 1px dotted gray;
   cursor: crosshair;
 }
 
 #out {
-  color: gray;
-  font-size: 2em;
-  font-family: monospace;
+    /* height: 2em; */
+    /* margin: 1em auto; */
+    color: gray;
+    /* font-size: 2em; */
+    font-family: monospace;
 }
 
 #coords {
-    display: inline;
     color: hsl(16, 60%, 50%);
 }
 #theta {

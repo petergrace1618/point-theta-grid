@@ -41,7 +41,8 @@ Point.prototype.drawAngle = function () {
   
   ctx.strokeStyle = 'rgb(0 200 255 / 30%)'
   ctx.beginPath()
-  ctx.moveTo(0, 0);
+  ctx.moveTo(100, 0);
+  ctx.lineTo(0, 0);
   ctx.lineTo(this.x, this.y);
   ctx.stroke();
 }
@@ -72,15 +73,13 @@ function drawGrid() {
 
 
 function showData() {
-  const theta = p.theta();
-  const rad = theta.toPrecision(5);
-  const deg = p.thetaDeg().toPrecision(4);
-  const cx = ('' + canvasX).padStart(4, ' ');
-  const cy = ('' + canvasY).padStart(4, ' ');
-  coordsEl.innerText = `(${cx},${cy})`;
-  thetaEl.innerText = '\u03b8 = ';
-  thetaEl.innerText += 
-  !isNaN(theta) ? ` ${rad} rad, ${deg}\u00b0` : ' undefined'; 
+  const cx = String(canvasX).padStart(4);
+  const cy = String(canvasY).padStart(4);
+  coordsEl.innerText = `(${cx},${cy}),`;
+
+  const rad = String(p.theta().toPrecision(4)).padStart(7);
+  const deg = String(p.thetaDeg().toPrecision(4)).padStart(4);  
+  thetaEl.innerText = `\u03b8 = ${rad}rad, ${deg}\u00b0`;
 }
 
 
