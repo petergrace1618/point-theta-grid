@@ -38,12 +38,37 @@ function lerp(a, b, x) {
   return a + (b - a) * x;
 }
 
-function easeInQuad(x) {
-  return x * x;
+function mapToRangeClamped(x, inStart, inEnd, outStart, outEnd) {
+  x = (x < inStart) ? inStart : x; 
+  x = (x > inEnd) ? inEnd : x; 
+  const normal = (x - inStart) / (inEnd - inStart);
+  return outStart + (outEnd - outStart) * normal;
 }
 
-function easeInExpo(x) {
-  return x === 0 ? 0 : Math.pow(2, 10 * x - 10);
+function linear(t) {
+  return t;
+}
+
+function easeInOutCirc(t) {
+  return t < 0.5
+    ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2
+    : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2;
+}
+
+function easeInQuad(t) {
+  return t * t;
+}
+
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function easeOutInCubic(t) {
+  return 0.5 + Math.pow(t - 0.81, 3);
+}
+
+function easeInExpo(t) {
+  return t === 0 ? 0 : Math.pow(2, 10 * t - 10);
 }
 
 // TODO: make calculateTheta and midPoint methods of Point class
@@ -70,10 +95,40 @@ function calculateTheta(p) {
   return theta + multiplier[y][x] * Math.PI;
 }
 
+
 function midPoint(p, q) {
   return {
     x: (p.x + q.x) / 2,
     y: (p.y + q.y) / 2
+  }
+}
+
+
+function iter(n, func, n0 = 0, inclusive = false) {
+  n += inclusive ? 1 : 0;
+  for (let i = n0; i < n; i++) {
+    func(i);
+  }
+}
+
+
+class Vector {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+function reflect(p, q) {
+  return 
+}
+
+// linear interpolation for vectors
+// q: another Vector-like object
+function lerpv(p, q, t) {
+  return {
+    x: p.x + (q.x - p.x) * t,
+    y: p.y + (q.y - p.y) * t
   }
 }
 

@@ -24,7 +24,7 @@ function Point(x, y) {
 }
 
 
-Point.prototype.draw = function() {
+Point.prototype.drawPoint = function() {
   ctx.fillStyle = 'hsl(16, 60%, 50%)'; 
   ctx.beginPath();
   ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
@@ -61,6 +61,7 @@ function drawGrid() {
   ctx.closePath();
   ctx.stroke();
   
+  // axes
   ctx.beginPath();
   ctx.strokeStyle = 'gray';
   ctx.moveTo(0, 100);
@@ -72,14 +73,16 @@ function drawGrid() {
 }
 
 
-function showData() {
+function showData(updateTheta = true) {
   const cx = String(canvasX).padStart(4);
   const cy = String(canvasY).padStart(4);
   coordsEl.innerText = `(${cx},${cy}),`;
 
-  const rad = String(p.theta().toPrecision(4)).padStart(7);
-  const deg = String(p.thetaDeg().toPrecision(4)).padStart(4);  
-  thetaEl.innerText = `\u03b8 = ${rad}rad, ${deg}\u00b0`;
+  if (updateTheta) {
+    const rad = String(p.theta().toPrecision(4)).padStart(7);
+    const deg = String(p.thetaDeg().toPrecision(4)).padStart(4);  
+    thetaEl.innerText = `\u03b8 = ${rad}rad, ${deg}\u00b0`;
+  }
 }
 
 
@@ -92,6 +95,7 @@ const scaleFactor = 3
 cvs.addEventListener('mousemove', e => {
   canvasX = Math.floor((e.offsetX - width / 2) / scaleFactor);
   canvasY = Math.floor((e.offsetY - height / 2) / -scaleFactor);
+  showData(false);
   
   if (e.buttons == 1) {
     draw();
@@ -108,7 +112,7 @@ function draw() {
   drawGrid();
   p = new Point(canvasX, canvasY);
   p.drawAngle();
-  p.draw();
+  p.drawPoint();
   showData();
 }
 
